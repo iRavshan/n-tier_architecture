@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Procode.ViewModel
 {
-    class UserViewModel
+    public class UserViewModel
     {
+
     }
 }

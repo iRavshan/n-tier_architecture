@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Procode.Data.Interfaces
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
     }
 }

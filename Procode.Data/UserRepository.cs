@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Procode.Data.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Procode.Data
 {
-    class UserRepository
+    public class UserRepository : IUserRepository
     {
     }
 }
