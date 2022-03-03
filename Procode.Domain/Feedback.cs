@@ -16,6 +16,9 @@ namespace Procode.Domain
         public string Text { get; set; }
 
         [Required]
+        public string Subject { get; set; }
+
+        [Required]
         public string AuthorName { get; set; }
 
         [Required]
