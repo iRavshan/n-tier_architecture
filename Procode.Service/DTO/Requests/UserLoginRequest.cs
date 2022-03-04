@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Procode.Service.DTO.Requests
 {
-    public class UserRegistrationRequest
+    public class UserLoginRequest
     {
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-
-        public string Username { get; set; }
 
         [Required]
         public string Password { get; set; }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +9,7 @@ namespace Procode.Service.Configuration
     public class AuthResult
     {
         public string Token { get; set; }
-        public string Succes { get; set; }
+        public bool Succes { get; set; }
         public List<string> Errors { get; set; }
     }
 }
