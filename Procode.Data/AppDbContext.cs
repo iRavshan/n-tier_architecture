@@ -14,6 +14,11 @@ namespace Procode.Data
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
+
         public DbSet<Content> Contents { get; set; }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Feedback> FeedBacks { get; set; }

@@ -30,16 +30,17 @@ namespace Procode.API.Controllers
         }
 
         [HttpPost]
+        [Route("Register")]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest user)
         {
             if (ModelState.IsValid)
             {
                 var existingUser = await userManager.FindByEmailAsync(user.Email);
-                if(existingUser != null)
+                if (existingUser != null)
                 {
                     return BadRequest(new RegistrationResponse()
                     {
-                        Errors = new List<string>() { "Email allaqachon ro'yxatga olingan"},
+                        Errors = new List<string>() { "Email allaqachon ro'yxatga olingan" },
                         Succes = false
                     });
 
@@ -76,6 +77,8 @@ namespace Procode.API.Controllers
             });
         }
 
+        [HttpPost]
+        [Route("Login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
         {
             if (ModelState.IsValid)

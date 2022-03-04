@@ -19,7 +19,7 @@ namespace Procode.Data
 
         public async Task<bool> Create(Speaker speaker)
         {
-            await dbContext
+            throw new NotImplementedException();
         }
 
         public Task<bool> Delete(Guid Id)

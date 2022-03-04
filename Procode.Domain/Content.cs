@@ -27,8 +27,6 @@ namespace Procode.Domain
         [Required]
         public string ThumbnailUrl { get; set; }
 
-        public IEnumerable<string> Tags { get; set; }
-
         public string VideoUrl { get; set; }
 
         public string GitUrl { get; set; }
