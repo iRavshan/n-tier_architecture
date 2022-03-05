@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Procode.Data.Interfaces
 {
-    interface IFeedbackRepository
+    public interface IFeedbackRepository
     {
-        IEnumerable<Feedback> GetAll();
+        Task<IEnumerable<Feedback>> GetAll();
         Task<Feedback> GetById(Guid Id);
         Task<bool> Create(Feedback content);
-        Task<bool> Update(Feedback content);
+        bool Update(Feedback content);
         Task<bool> Delete(Guid Id);
     }
 }

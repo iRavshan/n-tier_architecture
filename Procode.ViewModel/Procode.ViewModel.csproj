@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Procode.Service\Procode.Service.csproj" />
+    <ProjectReference Include="..\Procode.Data\Procode.Data.csproj" />
   </ItemGroup>
 
 </Project>

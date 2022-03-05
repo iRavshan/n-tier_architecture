@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32126.315
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procode.API", "Procode.API\Procode.API.csproj", "{457C571B-C221-484D-ADD2-DF17CE406E62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procode.API", "Procode.API\Procode.API.csproj", "{457C571B-C221-484D-ADD2-DF17CE406E62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procode.ViewModel", "Procode.ViewModel\Procode.ViewModel.csproj", "{454DC6AA-152B-402E-A4A5-143ED4D44B5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procode.ViewModel", "Procode.ViewModel\Procode.ViewModel.csproj", "{454DC6AA-152B-402E-A4A5-143ED4D44B5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procode.Service", "Procode.Service\Procode.Service.csproj", "{2B909F82-5E8D-42CC-B746-EBCB0ADC423C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procode.Service", "Procode.Service\Procode.Service.csproj", "{2B909F82-5E8D-42CC-B746-EBCB0ADC423C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procode.Data", "Procode.Data\Procode.Data.csproj", "{5F1E07FB-CAD0-46DD-B96E-0D645B3B9FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procode.Data", "Procode.Data\Procode.Data.csproj", "{5F1E07FB-CAD0-46DD-B96E-0D645B3B9FC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procode.Domain", "Procode.Domain\Procode.Domain.csproj", "{77477A24-4EF7-461F-BB3B-1504AD9905D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procode.Domain", "Procode.Domain\Procode.Domain.csproj", "{77477A24-4EF7-461F-BB3B-1504AD9905D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

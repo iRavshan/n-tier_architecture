@@ -1,4 +1,5 @@
-﻿using Procode.Data.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Procode.Data.Interfaces;
 using Procode.Domain;
 using System;
 using System.Collections.Generic;
@@ -10,29 +11,45 @@ namespace Procode.Data
 {
     public class FeedbackRepository : IFeedbackRepository
     {
-        public Task<bool> Create(Feedback content)
+        private readonly AppDbContext dbContext;
+
+        public FeedbackRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public Task<bool> Delete(Guid Id)
+        public async Task<bool> Create(Feedback content)
         {
-            throw new NotImplementedException();
+            await dbContext.Feedbacks.AddAsync(content);
+            return true;
         }
 
-        public IEnumerable<Feedback> GetAll()
+        public async Task<bool> Delete(Guid Id)
         {
-            throw new NotImplementedException();
+            var item = await dbContext.Feedbacks.FindAsync(Id);
+            if(item != null)
+            {
+                dbContext.Feedbacks.Remove(item);
+                return true;
+            }
+            return false;
         }
 
-        public Task<Feedback> GetById(Guid Id)
+        public async Task<IEnumerable<Feedback>> GetAll()
         {
-            throw new NotImplementedException();
+            return await dbContext.Feedbacks.ToListAsync(); 
         }
 
-        public Task<bool> Update(Feedback content)
+        public async Task<Feedback> GetById(Guid Id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Feedbacks.FindAsync(Id);
+        }
+
+        public bool Update(Feedback content)
+        {
+            var item = dbContext.Feedbacks.Attach(content);
+            item.State = EntityState.Modified;
+            return true;
         }
     }
 }

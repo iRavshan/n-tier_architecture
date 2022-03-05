@@ -21,6 +21,7 @@ namespace Procode.API.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<IdentityUser> userManager;
+
         private readonly JwtConfig jwtConfig;
 
         public AccountController(UserManager<IdentityUser> userManager, IOptionsMonitor<JwtConfig> optionsMonitor)
@@ -36,6 +37,7 @@ namespace Procode.API.Controllers
             if (ModelState.IsValid)
             {
                 var existingUser = await userManager.FindByEmailAsync(user.Email);
+
                 if (existingUser != null)
                 {
                     return BadRequest(new RegistrationResponse()
@@ -43,12 +45,22 @@ namespace Procode.API.Controllers
                         Errors = new List<string>() { "Email allaqachon ro'yxatga olingan" },
                         Succes = false
                     });
+                }
 
-                    var newUser = new IdentityUser() { Email = user.Email, UserName = user.Email.Substring(0, user.Email.IndexOf("@")) };
+                if(user.Password != user.ConfirmedPassword)
+                {
+                    return BadRequest(new RegistrationResponse()
+                    {
+                        Errors = new List<string>() { "Parol noto'g'ri tasdiqlandi" },
+                        Succes = false
+                    });
+                }
+                
+                var newUser = new IdentityUser() { Email = user.Email, UserName = user.Email.Substring(0, user.Email.IndexOf("@")) };
 
-                    var isCreated = await userManager.CreateAsync(newUser, user.Password);
+                var isCreated = await userManager.CreateAsync(newUser, user.Password);
 
-                    if (isCreated.Succeeded)
+                if (isCreated.Succeeded)
                     {
                         var jwtToken = GenerateJwtToken(newUser);
                         return Ok(new RegistrationResponse()
@@ -58,7 +70,7 @@ namespace Procode.API.Controllers
                         });
 
                     }
-                    else
+                else
                     {
                         return BadRequest(new RegistrationResponse()
                         {
@@ -66,12 +78,12 @@ namespace Procode.API.Controllers
                             Succes = false
                         });
                     }
-                }
+                
             }
 
             return BadRequest(new RegistrationResponse()
             {
-                Errors = new List<string> { "Invalid payload" },
+                Errors = new List<string> { "Ma'lumotlar yaroqli emas" },
                 Succes = false,
 
             });

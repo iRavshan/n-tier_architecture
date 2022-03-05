@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Procode.ViewModel\Procode.ViewModel.csproj" />
+    <ProjectReference Include="..\Procode.Service\Procode.Service.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Procode.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,5 +16,6 @@ namespace Procode.ViewModel
         public string PhotoUrl { get; set; }
         public string Quote { get; set; }
         public int SpeakersCount { get; set; }
+        public IEnumerable<Speaker> LastSpeakers { get; set; }
     }
 }

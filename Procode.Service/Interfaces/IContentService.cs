@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Procode.Service.Interfaces
 {
-    interface IContentService
+    public interface IContentService
     {
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Procode.Data.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Procode.Data.Interfaces;
 using Procode.Domain;
 using System;
 using System.Collections.Generic;
@@ -17,29 +18,40 @@ namespace Procode.Data
             this.dbContext = dbContext;
         }
 
-        public async Task<bool> Create(Speaker speaker)
+        public async Task<bool> Create(Speaker content)
         {
-            throw new NotImplementedException();
+            await dbContext.Speakers.AddAsync(content);
+            return true;
         }
 
-        public Task<bool> Delete(Guid Id)
+        public async Task<bool> Delete(Guid Id)
         {
-            throw new NotImplementedException();
+            var item = await dbContext.Speakers.FindAsync(Id);
+
+            if(item != null)
+            {
+                dbContext.Speakers.Remove(item);
+                return true;
+            }
+
+            return false;
         }
 
-        public IEnumerable<Speaker> GetAll()
+        public async Task<IEnumerable<Speaker>> GetAll()
         {
-            throw new NotImplementedException();
+            return await dbContext.Speakers.ToListAsync();
         }
 
-        public Task<Speaker> GetById(Guid Id)
+        public async Task<Speaker> GetById(Guid Id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Speakers.FindAsync(Id);
         }
 
-        public Task<bool> Update(Speaker speaker)
+        public bool Update(Speaker content)
         {
-            throw new NotImplementedException();
+            var item = dbContext.Speakers.Attach(content);
+            item.State = EntityState.Modified;
+            return true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Procode.Data.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using Procode.Data.Interfaces;
 using Procode.Domain;
 using System;
 using System.Collections.Generic;
@@ -12,59 +13,45 @@ namespace Procode.Data
     {
         private readonly AppDbContext dbContext;
 
-        public Task<bool> Create(Content content)
+        public ContentRepository(AppDbContext dbContext)
         {
-            throw new NotImplementedException();
+            this.dbContext = dbContext;
         }
 
-        public Task<bool> Delete(Guid Id)
+        public async Task<bool> Create(Content content)
         {
-            throw new NotImplementedException();
+            await dbContext.Contents.AddAsync(content);
+
+            return true;
         }
 
-        public IEnumerable<Content> GetAll()
+        public async Task<bool> Delete(Guid Id)
         {
-            throw new NotImplementedException();
+            var item = await dbContext.Contents.FindAsync(Id);
+
+            if(item != null)
+            {
+                dbContext.Contents.Remove(item);
+                return true;
+            }
+            return false;
         }
 
-        public Task<Content> GetById(Guid Id)
+        public async Task<IEnumerable<Content>> GetAll()
         {
-            throw new NotImplementedException();
+            return await dbContext.Contents.ToListAsync();
         }
 
-        public Task<bool> Update(Content content)
+        public async Task<Content> GetById(Guid Id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Contents.FindAsync(Id);
         }
 
-        //public ContentRepository(AppDbContext dbContext)
-        //{
-        //    this.dbContext = dbContext;
-        //}
-
-        //public Task<bool> Create(Content content)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<bool> Delete(Guid Id)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public IEnumerable<Content> GetAll()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public Task<Content> GetById(Guid Id)
-        //{
-
-        //}
-
-        //public Task<bool> Update(Content content)
-        //{
-
-        //}
+        public bool Update(Content content)
+        {
+            var item = dbContext.Contents.Attach(content);
+            item.State = EntityState.Modified;
+            return true;
+        }
     }
 }

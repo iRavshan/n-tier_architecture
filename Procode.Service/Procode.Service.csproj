@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Procode.Data\Procode.Data.csproj" />
+    <ProjectReference Include="..\Procode.ViewModel\Procode.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

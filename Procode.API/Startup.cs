@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Procode.Data;
+using Procode.Data.Interfaces;
 using Procode.Service.Configuration;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,12 @@ namespace Procode.API
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DatabaseConnection")));
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DatabaseConnection")));
+
+            services.AddScoped<IContentRepository, ContentRepository>();
+            services.AddScoped<ISpeakerRepository, SpeakerRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

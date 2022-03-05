@@ -9,10 +9,10 @@ namespace Procode.Data.Interfaces
 {
     public interface ISpeakerRepository
     {
-        IEnumerable<Speaker> GetAll();
+        Task<IEnumerable<Speaker>> GetAll();
         Task<Speaker> GetById(Guid Id);
         Task<bool> Create(Speaker content);
-        Task<bool> Update(Speaker content);
+        bool Update(Speaker content);
         Task<bool> Delete(Guid Id);
     }
 }
