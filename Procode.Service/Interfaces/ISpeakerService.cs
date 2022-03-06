@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Procode.Service.Interfaces
 {
-    interface ISpeakerService
+    public interface ISpeakerService
     {
     }
 }

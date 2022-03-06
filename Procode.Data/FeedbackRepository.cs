@@ -47,12 +47,5 @@ namespace Procode.Data
         {
             return await dbContext.Feedbacks.FindAsync(Id);
         }
-
-        public bool Update(Feedback content)
-        {
-            var item = dbContext.Feedbacks.Attach(content);
-            item.State = EntityState.Modified;
-            return true;
-        }
     }
 }

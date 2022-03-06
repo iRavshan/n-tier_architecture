@@ -23,5 +23,8 @@ namespace Procode.Domain
 
         [Required]
         public DateTime CreateTime { get; set; }
+
+        public bool isRead { get; set; }
+        public bool isDelete { get; set; } 
     }
 }

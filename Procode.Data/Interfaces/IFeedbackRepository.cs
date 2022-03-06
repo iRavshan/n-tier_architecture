@@ -12,7 +12,6 @@ namespace Procode.Data.Interfaces
         Task<IEnumerable<Feedback>> GetAll();
         Task<Feedback> GetById(Guid Id);
         Task<bool> Create(Feedback content);
-        bool Update(Feedback content);
         Task<bool> Delete(Guid Id);
         Task CompleteAsync();
     }

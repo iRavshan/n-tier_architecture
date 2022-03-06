@@ -71,17 +71,12 @@ namespace Procode.API
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<IContentService, ContentService>();
+            services.AddScoped<ISpeakerService, SpeakerService>();
+            services.AddScoped<IFeedbackService, FeedbackService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Procode.API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Description = "Kiritgin tokenni",
-                    Name = "Authorize",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                });
             });
         }
 
