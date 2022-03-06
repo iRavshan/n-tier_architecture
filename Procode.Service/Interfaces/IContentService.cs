@@ -9,13 +9,13 @@ using Procode.ViewModel;
 namespace Procode.Service.Interfaces
 {
     public interface IContentService
-    {
-        void Create(ContentViewModel model);
-        void Update(ContentViewModel model);
-        void Delete(Guid Id);
+    { 
+        Task Create(ContentViewModel model);
+        Task Update(ContentViewModel model);
+        Task<bool> Delete(Guid Id);
         Task<IEnumerable<ContentViewModel>> GetAll();
         Task<ContentViewModel> GetById(Guid Id);
         Task<IEnumerable<ContentViewModel>> LastContents(int count);
-
+        Task<ContentViewModel> LastContent();
     }
 }

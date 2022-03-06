@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Procode.Service;
 using Procode.Service.Interfaces;
@@ -30,25 +31,50 @@ namespace Procode.API.Controllers
 
         [HttpGet]
         [Route("GetById")]
-        public async Task<IActionResult> GetById([FromBody]Guid Id)
+        public async Task<IActionResult> GetById(Guid Id)
         {
             return Ok(await contentService.GetById(Id));
         }
 
         [HttpPost]
         [Route("Create")]
-        public IActionResult Create([FromBody]ContentViewModel model)
+        public async Task<IActionResult> Create(ContentViewModel model)
         {
-            contentService.Create(model);
+            await contentService.Create(model);
             return Ok();
         }
 
         [HttpPost]
         [Route("Delete")]
-        public IActionResult Delete(Guid Id)
+        public async Task<IActionResult> Delete(Guid Id)
         {
-            contentService.Delete(Id);
+            bool task = await contentService.Delete(Id);
+
+            if (task) return Ok();
+
+            return BadRequest();
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public async Task<IActionResult> Update(ContentViewModel model)
+        {
+            await contentService.Update(model);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("LastContents")]
+        public async Task<IActionResult> LastContents(int count)
+        {
+            return Ok(await contentService.LastContents(count));
+        }
+
+        [HttpGet]
+        [Route("LastContent")]
+        public async Task<IActionResult> LastContent()
+        {
+            return Ok(await contentService.LastContent());
         }
     }
 }

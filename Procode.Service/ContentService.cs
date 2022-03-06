@@ -20,31 +20,47 @@ namespace Procode.Service
             this.repoManager = repoManager;
         }
 
-        public async void Create(ContentViewModel model)
+        public async Task Create(ContentViewModel model)
         {
             await repoManager.Create((Content)model);
             await repoManager.CompleteAsync();
         }
 
-        public async void Delete(Guid Id)
+        public async Task<bool> Delete(Guid Id)
         {
-            await repoManager.Delete(Id);
-            await repoManager.CompleteAsync();
+            bool result = await repoManager.Delete(Id);
+
+            if (result)
+            {
+                await repoManager.CompleteAsync();
+                return true;
+            }
+
+            return false;    
         }
 
-        public async Task<IEnumerable<ContentViewModel>> GetAll() => 
-            (IEnumerable<ContentViewModel>)await repoManager.GetAll();
+        public async Task<IEnumerable<ContentViewModel>> GetAll() =>
+            (await repoManager.GetAll()).Select(w => (ContentViewModel)w);
 
         public async Task<ContentViewModel> GetById(Guid Id) => 
             (ContentViewModel)await repoManager.GetById(Id);
 
-        public Task<IEnumerable<ContentViewModel>> LastContents(int count)
+        public async Task<IEnumerable<ContentViewModel>> LastContents(int count)
         {
-            throw new NotImplementedException();
+            var items = await repoManager.GetAll();
+
+            return items.Take(count).Select(w => (ContentViewModel)w);
         }
 
-        public async void Update(ContentViewModel model)
+        public async Task<ContentViewModel> LastContent()
         {
+            var items = await repoManager.GetAll();
+
+            return (ContentViewModel)items.First();
+        }
+
+        public async Task Update(ContentViewModel model)
+        { 
             repoManager.Update((Content)model);
             await repoManager.CompleteAsync();
         }

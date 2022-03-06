@@ -67,13 +67,21 @@ namespace Procode.API
 
             services.AddControllers();
 
-            services.AddTransient<IContentRepository, ContentRepository>();
-            services.AddTransient<ISpeakerRepository, SpeakerRepository>();
-            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
-            services.AddTransient<IContentService, ContentService>();
+            services.AddScoped<IContentRepository, ContentRepository>();
+            services.AddScoped<ISpeakerRepository, SpeakerRepository>();
+            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<IContentService, ContentService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Procode.API", Version = "v1" });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Kiritgin tokenni",
+                    Name = "Authorize",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                });
             });
         }
 
@@ -92,6 +100,8 @@ namespace Procode.API
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 

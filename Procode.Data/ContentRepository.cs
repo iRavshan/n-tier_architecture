@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Procode.Data
 {
-    public class ContentRepository : IContentRepository, IDisposable
+    public class ContentRepository : IContentRepository
     {
         private readonly AppDbContext dbContext;
 
@@ -36,12 +36,8 @@ namespace Procode.Data
                 dbContext.Contents.Remove(item);
                 return true;
             }
-            return false;
-        }
 
-        public void Dispose()
-        {
-            dbContext.Dispose();
+            return false;
         }
 
         public async Task<IEnumerable<Content>> GetAll()

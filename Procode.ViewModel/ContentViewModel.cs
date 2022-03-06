@@ -1,4 +1,5 @@
 ﻿using Procode.Domain;
+using System.ComponentModel.DataAnnotations;
 using System;
 
 namespace Procode.ViewModel
@@ -13,6 +14,7 @@ namespace Procode.ViewModel
         public string ThumbnailUrl { get; set; }
         public string VideoUrl { get; set; }
         public string GitUrl { get; set; }
+        public DateTime CreateTime { get; set; }
 
         public static explicit operator ContentViewModel(Content content)
         {
@@ -25,7 +27,8 @@ namespace Procode.ViewModel
                 ShortDescription = content.ShortDescription,
                 ThumbnailUrl = content.ThumbnailUrl,
                 VideoUrl = content.VideoUrl,
-                GitUrl = content.GitUrl
+                GitUrl = content.GitUrl,
+                CreateTime = content.CreateTime
             };
         }
 
@@ -41,7 +44,7 @@ namespace Procode.ViewModel
                 ThumbnailUrl = content.ThumbnailUrl,
                 VideoUrl = content.VideoUrl,
                 GitUrl = content.GitUrl,
-                CreateTime = DateTime.Now
+                CreateTime = DateTime.UtcNow
             };
         }
     }
