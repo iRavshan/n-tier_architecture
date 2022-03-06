@@ -16,6 +16,10 @@ namespace Procode.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+        }
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Content> Contents { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }

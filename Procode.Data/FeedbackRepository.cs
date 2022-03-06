@@ -3,8 +3,6 @@ using Procode.Data.Interfaces;
 using Procode.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Procode.Data
@@ -16,6 +14,11 @@ namespace Procode.Data
         public FeedbackRepository(AppDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public async Task CompleteAsync()
+        {
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> Create(Feedback content)

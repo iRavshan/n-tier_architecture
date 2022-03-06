@@ -3,13 +3,11 @@ using Procode.Data.Interfaces;
 using Procode.Domain;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Procode.Data
 {
-    public class ContentRepository : IContentRepository
+    public class ContentRepository : IContentRepository, IDisposable
     {
         private readonly AppDbContext dbContext;
 
@@ -18,10 +16,14 @@ namespace Procode.Data
             this.dbContext = dbContext;
         }
 
+        public async Task CompleteAsync()
+        {
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> Create(Content content)
         {
             await dbContext.Contents.AddAsync(content);
-
             return true;
         }
 
@@ -35,6 +37,11 @@ namespace Procode.Data
                 return true;
             }
             return false;
+        }
+
+        public void Dispose()
+        {
+            dbContext.Dispose();
         }
 
         public async Task<IEnumerable<Content>> GetAll()

@@ -18,6 +18,11 @@ namespace Procode.Data
             this.dbContext = dbContext;
         }
 
+        public async Task CompleteAync()
+        {
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task<bool> Create(Speaker content)
         {
             await dbContext.Speakers.AddAsync(content);

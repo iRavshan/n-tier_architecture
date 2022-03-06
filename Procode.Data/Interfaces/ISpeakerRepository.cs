@@ -14,5 +14,6 @@ namespace Procode.Data.Interfaces
         Task<bool> Create(Speaker content);
         bool Update(Speaker content);
         Task<bool> Delete(Guid Id);
+        Task CompleteAync();
     }
 }

@@ -13,7 +13,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Procode.Data;
 using Procode.Data.Interfaces;
+using Procode.Service;
 using Procode.Service.Configuration;
+using Procode.Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,10 +42,6 @@ namespace Procode.API
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DatabaseConnection")));
 
-            services.AddScoped<IContentRepository, ContentRepository>();
-            services.AddScoped<ISpeakerRepository, SpeakerRepository>();
-            services.AddScoped<IFeedbackRepository, FeedbackRepository>();
-
             services.AddAuthentication(options => {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -68,6 +66,11 @@ namespace Procode.API
 
 
             services.AddControllers();
+
+            services.AddTransient<IContentRepository, ContentRepository>();
+            services.AddTransient<ISpeakerRepository, SpeakerRepository>();
+            services.AddTransient<IFeedbackRepository, FeedbackRepository>();
+            services.AddTransient<IContentService, ContentService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Procode.API", Version = "v1" });

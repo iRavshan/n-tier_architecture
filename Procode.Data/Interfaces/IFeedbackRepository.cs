@@ -14,5 +14,6 @@ namespace Procode.Data.Interfaces
         Task<bool> Create(Feedback content);
         bool Update(Feedback content);
         Task<bool> Delete(Guid Id);
+        Task CompleteAsync();
     }
 }

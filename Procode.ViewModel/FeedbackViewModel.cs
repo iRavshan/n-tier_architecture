@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Procode.ViewModel
 {
-    class FeedbackViewModel
+    public class FeedbackViewModel
     {
     }
 }

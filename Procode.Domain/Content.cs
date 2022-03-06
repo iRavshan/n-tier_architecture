@@ -31,5 +31,6 @@ namespace Procode.Domain
 
         public string GitUrl { get; set; }
 
+        public DateTime CreateTime { get; set; }
     }
 }
