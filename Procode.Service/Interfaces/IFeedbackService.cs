@@ -13,5 +13,7 @@ namespace Procode.Service.Interfaces
         Task<bool> Delete(Guid Id);
         Task<IEnumerable<FeedbackViewModel>> GetAll();
         Task<FeedbackViewModel> GetById(Guid Id);
+        Task<bool> isDelete(Guid Id);
+        Task<bool> isRead(Guid Id);
     }
 }

@@ -15,7 +15,34 @@ namespace Procode.ViewModel
         public string Job { get; set; }
         public string PhotoUrl { get; set; }
         public string Quote { get; set; }
-        public int SpeakersCount { get; set; }
-        public IEnumerable<Speaker> LastSpeakers { get; set; }
+        public DateTime CreateTime { get; set; }
+
+        public static explicit operator SpeakerViewModel(Speaker model)
+        {
+            return new SpeakerViewModel
+            {
+                Id = model.Id,
+                Firstname = model.Firstname,
+                Lastname = model.Lastname,
+                Job = model.Job,
+                PhotoUrl = model.PhotoUrl,
+                Quote = model.Quote,
+                CreateTime = model.CreateTime
+            };
+        }
+
+        public static explicit operator Speaker(SpeakerViewModel model)
+        {
+            return new Speaker
+            {
+                Id = model.Id,
+                Firstname = model.Firstname,
+                Lastname = model.Lastname,
+                Job = model.Job,
+                Quote = model.Quote,
+                PhotoUrl = model.PhotoUrl,
+                CreateTime = DateTime.Now
+            };
+        }
     }
 }

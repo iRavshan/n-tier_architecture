@@ -42,5 +42,27 @@ namespace Procode.Service
 
         public async Task<FeedbackViewModel> GetById(Guid Id) =>
             (FeedbackViewModel)await repoManager.GetById(Id);
+
+        public async Task<bool> isDelete(Guid Id)
+        {
+            bool response = await repoManager.isDelete(Id);
+            if (response)
+            {
+                await repoManager.CompleteAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> isRead(Guid Id)
+        {
+            bool response = await repoManager.isRead(Id);
+            if (response)
+            {
+                await repoManager.CompleteAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }

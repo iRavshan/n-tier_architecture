@@ -38,7 +38,7 @@ namespace Procode.ViewModel
                 Text = model.Text,
                 Subject = model.Subject,
                 AuthorEmail = model.AuthorEmail,
-                CreateTime = DateTime.UtcNow,
+                CreateTime = DateTime.Now,
                 isRead = false,
                 isDelete = false
             };

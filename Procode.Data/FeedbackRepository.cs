@@ -47,5 +47,23 @@ namespace Procode.Data
         {
             return await dbContext.Feedbacks.FindAsync(Id);
         }
+
+        public async Task<bool> isDelete(Guid Id)
+        {
+            var item = await dbContext.Feedbacks.FindAsync(Id);
+            if (item == null)
+                return false;
+            item.isDelete = true;
+            return true;
+        }
+
+        public async Task<bool> isRead(Guid Id)
+        {
+            var item = await dbContext.Feedbacks.FindAsync(Id);
+            if (item == null)
+                return false;
+            item.isRead = true;
+            return true;
+        }
     }
 }

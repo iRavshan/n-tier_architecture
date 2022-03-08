@@ -26,5 +26,6 @@ namespace Procode.Domain
 
         [Required]
         public string Quote { get; set; }
+        public DateTime CreateTime { get; set; }
     }
 }

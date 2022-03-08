@@ -44,7 +44,7 @@ namespace Procode.API.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Delete")]
         public async Task<IActionResult> Delete(Guid Id)
         {
@@ -55,7 +55,7 @@ namespace Procode.API.Controllers
             return BadRequest();
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("Update")]
         public async Task<IActionResult> Update(ContentViewModel model)
         {
@@ -63,7 +63,7 @@ namespace Procode.API.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("LastContents")]
         public async Task<IActionResult> LastContents(int count)
         {

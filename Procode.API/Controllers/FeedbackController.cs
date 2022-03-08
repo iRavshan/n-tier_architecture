@@ -42,7 +42,7 @@ namespace Procode.API.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpDelete]
         [Route("Delete")]
         public async Task<IActionResult> Delete(Guid Id)
         {
@@ -50,7 +50,25 @@ namespace Procode.API.Controllers
 
             if (task) return Ok();
 
-            return BadRequest();
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("ToTrash")]
+        public async Task<IActionResult> isDelete(Guid Id)
+        {
+            bool item = await feedbackService.isDelete(Id);
+            if (item) return Ok();
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("ToReaded")]
+        public async Task<IActionResult> isRead(Guid Id)
+        {
+            bool item = await feedbackService.isRead(Id);
+            if (item) return Ok();
+            return NotFound();
         }
     }
 }
