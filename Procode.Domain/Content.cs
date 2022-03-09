@@ -32,5 +32,7 @@ namespace Procode.Domain
         public string GitUrl { get; set; }
 
         public DateTime CreateTime { get; set; }
+
+        public IEnumerable<Speaker> Speakers { get; set; }
     }
 }
