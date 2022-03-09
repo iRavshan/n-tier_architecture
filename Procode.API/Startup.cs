@@ -39,7 +39,7 @@ namespace Procode.API
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(
+                options.UseNpgsql(
                     Configuration.GetConnectionString("DatabaseConnection")));
 
             services.AddAuthentication(options => {
