@@ -69,10 +69,12 @@ namespace Procode.Service
                 File.Delete(path);
             }
 
+
+            speaker.PhotoUrl = fileName;
+
             await fileStream.FlushAsync();
             fileStream.Close();
 
-            speaker.PhotoUrl = fileName;
 
             await repoManager.CompleteAync();
         }
