@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Hosting;
 using Procode.Service.Interfaces;
 using Procode.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Procode.API.Controllers
 {
@@ -14,10 +16,12 @@ namespace Procode.API.Controllers
     public class SpeakerController : ControllerBase
     {
         private readonly ISpeakerService speakerService;
+        private readonly IWebHostEnvironment webHost;
 
-        public SpeakerController(ISpeakerService speakerService)
+        public SpeakerController(ISpeakerService speakerService, IWebHostEnvironment webHost)
         {
             this.speakerService = speakerService;
+            this.webHost = webHost;
         }
 
         [HttpGet]
@@ -59,6 +63,32 @@ namespace Procode.API.Controllers
         {
             await speakerService.Update(model);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("SetImage")]
+        public async Task<IActionResult> SetImage(Guid Id, IFormFile file)
+        {
+            await speakerService.SetImage(Id, file);
+            return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("GetImage")]
+        public async Task<IActionResult> GetImage(Guid Id)
+        {
+            var speaker = await speakerService.GetById(Id);
+            if (speaker is not null)
+            {
+                string path = Path.Combine(webHost.WebRootPath, $"Images/Speaker/{speaker.PhotoUrl}");
+                byte[] file = await System.IO.File.ReadAllBytesAsync(path);
+                return File(file, "octet/stream", Path.GetFileName(path));
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

@@ -12,4 +12,9 @@
     <ProjectReference Include="..\Procode.Service\Procode.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Thumbnails\" />
+    <Folder Include="wwwroot\Images\Speakers\" />
+  </ItemGroup>
+
 </Project>

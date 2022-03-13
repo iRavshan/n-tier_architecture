@@ -1,6 +1,8 @@
-﻿using Procode.ViewModel;
+﻿using Microsoft.AspNetCore.Http;
+using Procode.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +16,6 @@ namespace Procode.Service.Interfaces
         Task<bool> Delete(Guid Id);
         Task<IEnumerable<SpeakerViewModel>> GetAll();
         Task<SpeakerViewModel> GetById(Guid Id);
+        Task SetImage(Guid Id, IFormFile file);
     }
 }
