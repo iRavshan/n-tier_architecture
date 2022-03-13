@@ -81,7 +81,7 @@ namespace Procode.API.Controllers
             var speaker = await speakerService.GetById(Id);
             if (speaker is not null)
             {
-                string path = Path.Combine(webHost.WebRootPath, $"Images/Speaker/{speaker.PhotoUrl}");
+                string path = Path.Combine(webHost.WebRootPath, $"Images/Speakers/{speaker.PhotoUrl}");
                 byte[] file = await System.IO.File.ReadAllBytesAsync(path);
                 return File(file, "octet/stream", Path.GetFileName(path));
             }
