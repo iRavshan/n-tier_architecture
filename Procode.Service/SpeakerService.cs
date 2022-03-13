@@ -60,7 +60,7 @@ namespace Procode.Service
             var speaker = await repoManager.GetById(Id);
 
             string fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            string path = Path.Combine(webHost.WebRootPath, $"Images/Speaker/{fileName}");
+            string path = Path.Combine(webHost.WebRootPath, $"Images/Speakers/{fileName}");
             FileStream fileStream = File.Open(path, FileMode.Create);
             await file.OpenReadStream().CopyToAsync(fileStream);
 
