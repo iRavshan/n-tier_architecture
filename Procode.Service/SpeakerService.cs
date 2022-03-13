@@ -73,6 +73,7 @@ namespace Procode.Service
             fileStream.Close();
 
             speaker.PhotoUrl = fileName;
+
             await repoManager.CompleteAync();
         }
     }
