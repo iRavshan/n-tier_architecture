@@ -1,10 +1,13 @@
-﻿using Procode.Data;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Procode.Data;
 using Procode.Data.Interfaces;
 using Procode.Domain;
 using Procode.Service.Interfaces;
 using Procode.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,10 +17,12 @@ namespace Procode.Service
     public class ContentService : IContentService
     {
         private readonly IContentRepository repoManager;
+        private readonly IWebHostEnvironment webHost;
 
-        public ContentService(IContentRepository repoManager)
+        public ContentService(IContentRepository repoManager, IWebHostEnvironment webHost)
         {
             this.repoManager = repoManager;
+            this.webHost = webHost;
         }
 
         public async Task Create(ContentViewModel model)
@@ -62,6 +67,25 @@ namespace Procode.Service
         public async Task Update(ContentViewModel model)
         { 
             repoManager.Update((Content)model);
+            await repoManager.CompleteAsync();
+        }
+
+        public async Task SetImage(Guid Id, IFormFile file)
+        {
+            var content = await repoManager.GetById(Id);
+
+            string uniqueFilename = string.Empty;
+
+            if (file is not null)
+            {
+                string uploadFolder = Path.Combine(webHost.WebRootPath, "Images/Thumbnails");
+                uniqueFilename = Guid.NewGuid() + "_" + file.FileName;
+                string ImageFilePath = Path.Combine(uploadFolder, uniqueFilename);
+                await file.CopyToAsync(new FileStream(ImageFilePath, FileMode.Create));
+            }
+
+            content.ThumbnailUrl = uniqueFilename;
+
             await repoManager.CompleteAsync();
         }
     }

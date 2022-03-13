@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Procode.Service;
@@ -6,6 +7,7 @@ using Procode.Service.Interfaces;
 using Procode.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,10 +18,12 @@ namespace Procode.API.Controllers
     public class ContentController : ControllerBase
     {
         private readonly IContentService contentService;
+        private readonly IWebHostEnvironment webHost;
 
-        public ContentController(IContentService contentService)
+        public ContentController(IContentService contentService, IWebHostEnvironment webHost)
         {
             this.contentService = contentService;
+            this.webHost = webHost;
         }
 
         [HttpGet]
@@ -75,6 +79,34 @@ namespace Procode.API.Controllers
         public async Task<IActionResult> LastContent()
         {
             return Ok(await contentService.LastContent());
+        }
+
+        [HttpPost]
+        [Route("SetImage")]
+        public async Task<IActionResult> SetImage(Guid Id, IFormFile file)
+        {
+            await contentService.SetImage(Id, file);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("GetImage")]
+        public async Task<IActionResult> GetImage(Guid Id)
+        {
+            var content = await contentService.GetById(Id);
+
+            if (content is not null)
+            {
+                string uploadFolder = Path.Combine(webHost.WebRootPath, "Images/Thumbnails");
+                string ImageFilePath = Path.Combine(uploadFolder, content.ThumbnailUrl);
+                byte[] file = await System.IO.File.ReadAllBytesAsync(ImageFilePath);
+                return File(file, "octet/stream", Path.GetFileName(ImageFilePath));
+            }
+
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

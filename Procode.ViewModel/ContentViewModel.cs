@@ -11,6 +11,7 @@ namespace Procode.ViewModel
         public string AuthorFirstname { get; set; }
         public string AuthorLastname { get; set; }
         public string ShortDescription { get; set; }
+        public string Tag { get; set; }
         public string ThumbnailUrl { get; set; }
         public string VideoUrl { get; set; }
         public string GitUrl { get; set; }
@@ -26,6 +27,7 @@ namespace Procode.ViewModel
                 AuthorLastname = content.AuthorLastname,
                 ShortDescription = content.ShortDescription,
                 ThumbnailUrl = content.ThumbnailUrl,
+                Tag = content.Tag,
                 VideoUrl = content.VideoUrl,
                 GitUrl = content.GitUrl,
                 CreateTime = content.CreateTime
@@ -42,6 +44,7 @@ namespace Procode.ViewModel
                 AuthorLastname = content.AuthorLastname,
                 ShortDescription = content.ShortDescription,
                 ThumbnailUrl = content.ThumbnailUrl,
+                Tag = content.Tag,
                 VideoUrl = content.VideoUrl,
                 GitUrl = content.GitUrl,
                 CreateTime = DateTime.UtcNow

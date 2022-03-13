@@ -84,9 +84,8 @@ namespace Procode.API.Controllers
             {
                 string uploadFolder = Path.Combine(webHost.WebRootPath, "Images/Speakers");
                 string ImageFilePath = Path.Combine(uploadFolder, speaker.PhotoUrl);
-                string path = Path.Combine(webHost.WebRootPath, $"Images/Speakers/{speaker.PhotoUrl}");
                 byte[] file = await System.IO.File.ReadAllBytesAsync(ImageFilePath);
-                return File(file, "octet/stream", Path.GetFileName(path));
+                return File(file, "octet/stream", Path.GetFileName(ImageFilePath));
             }
 
             else
