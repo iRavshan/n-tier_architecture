@@ -59,22 +59,17 @@ namespace Procode.Service
         {
             var speaker = await repoManager.GetById(Id);
 
-            string fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            string path = Path.Combine(webHost.WebRootPath, $"Images/Speakers/{fileName}");
-            FileStream fileStream = File.Open(path, FileMode.Create);
-            await file.OpenReadStream().CopyToAsync(fileStream);
+            string uniqueFilename = string.Empty;
 
-            if (!string.IsNullOrEmpty(speaker.PhotoUrl))
+            if(file is not null)
             {
-                File.Delete(path);
+                string uploadFolder = Path.Combine(webHost.WebRootPath, "Images/Speakers");
+                uniqueFilename = Guid.NewGuid() + "_" + file.FileName;
+                string ImageFilePath = Path.Combine(uploadFolder, uniqueFilename);
+                await file.CopyToAsync(new FileStream(ImageFilePath, FileMode.Create));
             }
 
-
-            speaker.PhotoUrl = fileName;
-
-            await fileStream.FlushAsync();
-            fileStream.Close();
-
+            speaker.PhotoUrl = uniqueFilename;
 
             await repoManager.CompleteAync();
         }
