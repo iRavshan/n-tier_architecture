@@ -12,8 +12,7 @@ namespace Procode.ViewModel
         public string AuthorLastname { get; set; }
         public string ShortDescription { get; set; }
         public string Tag { get; set; }
-        public string ThumbnailUrl { get; set; }
-        public string VideoUrl { get; set; }
+        public string YouTubeVideoID { get; set; }
         public string GitUrl { get; set; }
         public DateTime CreateTime { get; set; }
 
@@ -26,9 +25,8 @@ namespace Procode.ViewModel
                 AuthorFirstname = content.AuthorFirstname,
                 AuthorLastname = content.AuthorLastname,
                 ShortDescription = content.ShortDescription,
-                ThumbnailUrl = content.ThumbnailUrl,
+                YouTubeVideoID = content.YouTubeVideoID,
                 Tag = content.Tag,
-                VideoUrl = content.VideoUrl,
                 GitUrl = content.GitUrl,
                 CreateTime = content.CreateTime
             };
@@ -43,9 +41,8 @@ namespace Procode.ViewModel
                 AuthorFirstname = content.AuthorFirstname,
                 AuthorLastname = content.AuthorLastname,
                 ShortDescription = content.ShortDescription,
-                ThumbnailUrl = content.ThumbnailUrl,
                 Tag = content.Tag,
-                VideoUrl = content.VideoUrl,
+                YouTubeVideoID = content.YouTubeVideoID,
                 GitUrl = content.GitUrl,
                 CreateTime = DateTime.UtcNow
             };
