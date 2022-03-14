@@ -70,23 +70,5 @@ namespace Procode.Service
             await repoManager.CompleteAsync();
         }
 
-        public async Task SetImage(Guid Id, IFormFile file)
-        {
-            var content = await repoManager.GetById(Id);
-
-            string uniqueFilename = string.Empty;
-
-            if (file is not null)
-            {
-                string uploadFolder = Path.Combine(webHost.WebRootPath, "Images/Thumbnails");
-                uniqueFilename = Guid.NewGuid() + "_" + file.FileName;
-                string ImageFilePath = Path.Combine(uploadFolder, uniqueFilename);
-                await file.CopyToAsync(new FileStream(ImageFilePath, FileMode.Create));
-            }
-
-            content.ThumbnailUrl = uniqueFilename;
-
-            await repoManager.CompleteAsync();
-        }
     }
 }

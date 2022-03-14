@@ -18,6 +18,5 @@ namespace Procode.Service.Interfaces
         Task<ContentViewModel> GetById(Guid Id);
         Task<IEnumerable<ContentViewModel>> LastContents(int count);
         Task<ContentViewModel> LastContent();
-        Task SetImage(Guid Id, IFormFile file);
     }
 }
