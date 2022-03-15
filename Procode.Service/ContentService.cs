@@ -59,7 +59,7 @@ namespace Procode.Service
 
         public async Task<ContentViewModel> LastContent()
         {
-            var items = await repoManager.GetAll();
+            var items = Enumerable.Reverse(await repoManager.GetAll());
 
             return (ContentViewModel)items.First();
         }
