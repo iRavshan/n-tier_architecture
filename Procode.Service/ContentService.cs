@@ -54,7 +54,7 @@ namespace Procode.Service
         {
             var items = await repoManager.GetAll();
 
-            return items.Take(count).Select(w => (ContentViewModel)w);
+            return Enumerable.Reverse(items.Take(count).Select(w => (ContentViewModel)w));
         }
 
         public async Task<ContentViewModel> LastContent()
