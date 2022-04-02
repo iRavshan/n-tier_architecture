@@ -1,6 +1,7 @@
 ﻿using Procode.Domain;
 using System.ComponentModel.DataAnnotations;
 using System;
+using Microsoft.AspNetCore.Http;
 
 namespace Procode.ViewModel
 {
@@ -14,6 +15,7 @@ namespace Procode.ViewModel
         public string Tag { get; set; }
         public string YouTubeVideoID { get; set; }
         public string GitUrl { get; set; }
+        public string Text { get; set; }
         public DateTime CreateTime { get; set; }
 
         public static explicit operator ContentViewModel(Content content)
@@ -28,7 +30,8 @@ namespace Procode.ViewModel
                 YouTubeVideoID = content.YouTubeVideoID,
                 Tag = content.Tag,
                 GitUrl = content.GitUrl,
-                CreateTime = content.CreateTime
+                CreateTime = content.CreateTime,
+                Text = content.Text
             };
         }
 
@@ -44,7 +47,8 @@ namespace Procode.ViewModel
                 Tag = content.Tag,
                 YouTubeVideoID = content.YouTubeVideoID,
                 GitUrl = content.GitUrl,
-                CreateTime = DateTime.UtcNow
+                CreateTime = DateTime.Now,
+                Text = content.Text
             };
         }
     }

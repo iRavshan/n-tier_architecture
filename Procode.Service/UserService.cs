@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Procode.Service
 {
-    class UserService
+    public class UserService
     {
     }
 }

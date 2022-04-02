@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Procode.Data
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext<User>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
+        public AppDbContext(DbContextOptions<AppDbContext> options):base(options) 
         {
 
         }
@@ -20,8 +20,11 @@ namespace Procode.Data
         {
             base.OnModelCreating(builder);
         }
+
+
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Content> Contents { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

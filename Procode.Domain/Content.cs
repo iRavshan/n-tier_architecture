@@ -27,10 +27,14 @@ namespace Procode.Domain
         [Required]
         public string Tag { get; set; }
 
+        [Required]
+        public string Text { get; set; }
+       
         public string YouTubeVideoID { get; set; }
 
         public string GitUrl { get; set; }
 
         public DateTime CreateTime { get; set; }
+
     }
 }

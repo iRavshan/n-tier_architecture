@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Procode.Data;
 using Procode.Data.Interfaces;
+using Procode.Domain;
 using Procode.Service;
 using Procode.Service.Configuration;
 using Procode.Service.Interfaces;
@@ -61,7 +62,7 @@ namespace Procode.API
                     };
                 });
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<User, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>();
 
 

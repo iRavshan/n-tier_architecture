@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Procode.Domain;
 using Procode.Service.Configuration;
 using Procode.Service.DTO.Requests;
 using Procode.Service.DTO.Responses;
@@ -20,11 +21,11 @@ namespace Procode.API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<User> userManager;
 
         private readonly JwtConfig jwtConfig;
 
-        public AccountController(UserManager<IdentityUser> userManager, IOptionsMonitor<JwtConfig> optionsMonitor)
+        public AccountController(UserManager<User> userManager, IOptionsMonitor<JwtConfig> optionsMonitor)
         {
             this.userManager = userManager;
             jwtConfig = optionsMonitor.CurrentValue;
@@ -56,7 +57,7 @@ namespace Procode.API.Controllers
                     });
                 }
                 
-                var newUser = new IdentityUser() { Email = user.Email, UserName = user.Email.Substring(0, user.Email.IndexOf("@")) };
+                var newUser = new User() { Email = user.Email, UserName = user.Username };
 
                 var isCreated = await userManager.CreateAsync(newUser, user.Password);
 
@@ -91,6 +92,7 @@ namespace Procode.API.Controllers
 
         [HttpPost]
         [Route("Login")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
         {
             if (ModelState.IsValid)
@@ -133,18 +135,19 @@ namespace Procode.API.Controllers
             });
         }
 
-        private string GenerateJwtToken(IdentityUser user)
+        private string GenerateJwtToken(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(jwtConfig.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {
-                    new Claim("Id", user.Id),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
+                    new Claim(ClaimTypes.Role, "User"),
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.GivenName, user.UserName)
                 }),
+
                 Expires = DateTime.UtcNow.AddHours(6),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };

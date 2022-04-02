@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Images\Thumbnails\" />
     <Folder Include="wwwroot\Images\Speakers\" />
+    <Folder Include="wwwroot\Files\" />
   </ItemGroup>
 
 </Project>
