@@ -64,7 +64,7 @@ namespace Procode.API.Controllers
                 if (isCreated.Succeeded)
                     {
                         var jwtToken = GenerateJwtToken(newUser);
-                        return Ok(new RegistrationResponse()
+                        return  BadRequest(new RegistrationResponse()
                         {
                             Succes = true,
                             Token = jwtToken
