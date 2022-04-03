@@ -69,11 +69,13 @@ namespace Procode.API
             services.AddControllers();
 
             services.AddScoped<IContentRepository, ContentRepository>();
-            services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+
             services.AddScoped<IContentService, ContentService>();
-            services.AddScoped<ISpeakerService, SpeakerService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
+            services.AddScoped<ICommentService, CommentService>();
+            
 
             services.AddSwaggerGen(c =>
             {
