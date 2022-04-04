@@ -92,7 +92,6 @@ namespace Procode.API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest user)
         {
             if (ModelState.IsValid)

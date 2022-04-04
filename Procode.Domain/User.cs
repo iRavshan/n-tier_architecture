@@ -12,9 +12,6 @@ namespace Procode.Domain
     public class User : IdentityUser
     { 
 
-        [Required]
-        public string Password { get; set; }
-
         public DateTime RegisteredDateTime { get; set; }
 
         public string Bio { get; set; }

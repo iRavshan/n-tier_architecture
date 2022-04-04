@@ -17,11 +17,9 @@ namespace Procode.Service.DTO.Requests
         public string Username { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [Required]
-        [DataType(DataType.Password)]
         public string ConfirmedPassword { get; set; }
     }
 }

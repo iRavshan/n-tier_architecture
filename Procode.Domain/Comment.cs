@@ -25,5 +25,7 @@ namespace Procode.Domain
 
         public bool IsReply { get; set; }
 
+        public ICollection<Comment> ReplyComments { get; set; }
+
     }
 }
