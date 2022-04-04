@@ -57,7 +57,13 @@ namespace Procode.API.Controllers
                     });
                 }
                 
-                var newUser = new User() { Email = user.Email, UserName = user.Username };
+                var newUser = new User() 
+                { 
+                    Email = user.Email, 
+                    UserName = user.Username, 
+                    RegisteredDateTime = DateTime.Now,
+                    DisplayEmail = true
+                };
 
                 var isCreated = await userManager.CreateAsync(newUser, user.Password);
 

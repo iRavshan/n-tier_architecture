@@ -71,10 +71,12 @@ namespace Procode.API
             services.AddScoped<IContentRepository, ContentRepository>();
             services.AddScoped<IFeedbackRepository, FeedbackRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddScoped<IContentService, ContentService>();
             services.AddScoped<IFeedbackService, FeedbackService>();
             services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<IUserService, UserService>();
             
 
             services.AddSwaggerGen(c =>
