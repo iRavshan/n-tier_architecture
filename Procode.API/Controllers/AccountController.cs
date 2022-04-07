@@ -108,7 +108,7 @@ namespace Procode.API.Controllers
                 {
                     return BadRequest(new RegistrationResponse()
                     {
-                        Errors = new List<string>() { "Invalid login request" },
+                        Errors = new List<string>() { "Ushbu email ro'yxatga olinmagan" },
                         Succes = false
                     });
                 }
@@ -121,7 +121,7 @@ namespace Procode.API.Controllers
                     {
                         return BadRequest(new RegistrationResponse()
                         {
-                            Errors = new List<string>() { "Invalid login request" },
+                            Errors = new List<string>() { "Email yoki parol xato" },
                             Succes = false
                         });
                     }
