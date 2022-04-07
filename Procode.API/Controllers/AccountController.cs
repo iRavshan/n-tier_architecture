@@ -112,32 +112,42 @@ namespace Procode.API.Controllers
                         Succes = false
                     });
                 }
-
-                var isCorrect = await userManager.CheckPasswordAsync(existingUser, user.Password);
-
-                if (!isCorrect)
+                
+                else
                 {
-                    return BadRequest(new RegistrationResponse()
+                    var isCorrect = await userManager.CheckPasswordAsync(existingUser, user.Password);
+
+                    if (!isCorrect)
                     {
-                        Errors = new List<string>() { "Invalid login request" },
-                        Succes = false
-                    });
+                        return BadRequest(new RegistrationResponse()
+                        {
+                            Errors = new List<string>() { "Invalid login request" },
+                            Succes = false
+                        });
+                    }
+
+                    else
+                    {
+                        var jwtToken = GenerateJwtToken(existingUser);
+
+                        return Ok(new RegistrationResponse()
+                        {
+                            Succes = true,
+                            Token = jwtToken
+                        });
+                    }
                 }
-
-                var jwtToken = GenerateJwtToken(existingUser);
-
-                return Ok(new RegistrationResponse()
-                {
-                    Succes = true,
-                    Token = jwtToken
-                });
+                
             }
 
-            return BadRequest(new RegistrationResponse()
+            else
             {
-                 Errors = new List<string>() { "Invalid payload" },
-                 Succes = false
-            });
+                return BadRequest(new RegistrationResponse()
+                {
+                    Errors = new List<string>() { "Invalid payload" },
+                    Succes = false
+                });
+            }
         }
 
         private string GenerateJwtToken(User user)
