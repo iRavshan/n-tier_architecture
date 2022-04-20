@@ -24,5 +24,6 @@ namespace Procode.Data
         public DbSet<Content> Contents { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Post> Posts { get; set; }
     }
 }

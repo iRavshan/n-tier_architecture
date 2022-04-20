@@ -27,8 +27,6 @@ namespace Procode.ViewModel
             {
                 Id = comment.Id,
                 Text = comment.Text,
-                User = comment.User,
-                Content = comment.Content,
                 CreatedTime = comment.CreatedTime,
                 IsReply = comment.IsReply
             };
@@ -40,8 +38,6 @@ namespace Procode.ViewModel
             {
                 Id = model.Id,
                 Text = model.Text,
-                User = model.User,
-                Content = model.Content,
                 CreatedTime = DateTime.Now,
                 IsReply = model.IsReply
             };

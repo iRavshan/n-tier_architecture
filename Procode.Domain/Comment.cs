@@ -17,10 +17,6 @@ namespace Procode.Domain
         [Required]
         public string Text { get; set; }
 
-        public User User { get; set; }
-
-        public Content Content { get; set; }
-
         public DateTime CreatedTime { get; set; }
 
         public bool IsReply { get; set; }
