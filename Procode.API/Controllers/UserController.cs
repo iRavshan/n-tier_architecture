@@ -49,10 +49,16 @@ namespace Procode.API.Controllers
 
         [HttpDelete]
         [Route("Delete")]
-        public async Task<IActionResult> Delete(Guid Id)
+        public async Task<IActionResult> Delete(string Email)
         {
-            if (await userService.Delete(Id))
+            var eUser = await userManager.FindByEmailAsync(Email);
+
+            if (eUser != null)
+            {
+                await userManager.DeleteAsync(eUser);
                 return Ok();
+            }
+
             return NotFound();
         }
     }
