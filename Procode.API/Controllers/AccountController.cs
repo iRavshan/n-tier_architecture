@@ -160,7 +160,12 @@ namespace Procode.API.Controllers
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
                     new Claim(ClaimTypes.Role, "User"),
                     new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.GivenName, user.UserName)
+                    new Claim(ClaimTypes.GivenName, user.UserName),
+                    new Claim(ClaimTypes.Uri, user.WebsiteUri),
+                    new Claim("Bio", user.Bio),
+                    new Claim("Status", user.Status),
+                    new Claim("DisplayEmail", user.DisplayEmail.ToString()),
+                    new Claim(ClaimTypes.Country, user.Company)
                 }),
 
                 Expires = DateTime.UtcNow.AddHours(6),
