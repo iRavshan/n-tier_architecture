@@ -23,6 +23,8 @@ namespace Procode.Domain
 
         public string Tags { get; set; }
 
+        public string AuthorUsername { get; set; }
+
         public User User { get; set; }
 
         public DateTime CreatedTime { get; set; }
