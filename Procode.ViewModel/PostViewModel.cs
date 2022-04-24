@@ -19,6 +19,8 @@ namespace Procode.ViewModel
 
         public string Tags { get; set; }
 
+        public string AuthorUsername { get; set; }
+
         public User User { get; set; }
 
         public DateTime CreatedTime { get; set; }
@@ -32,6 +34,7 @@ namespace Procode.ViewModel
                 ShortDescription = post.ShortDescription,
                 Text = post.Text,
                 Tags = post.Tags,
+                AuthorUsername = post.AuthorUsername,
                 User = post.User,
                 CreatedTime = post.CreatedTime
             };
@@ -46,6 +49,7 @@ namespace Procode.ViewModel
                 ShortDescription = post.ShortDescription,
                 Text = post.Text,
                 Tags = post.Tags,
+                AuthorUsername = post.AuthorUsername,
                 User = post.User,
                 CreatedTime = post.CreatedTime
             };
